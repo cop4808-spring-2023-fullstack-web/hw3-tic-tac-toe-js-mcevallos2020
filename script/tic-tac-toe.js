@@ -1,4 +1,5 @@
 const statusDisplay = document.querySelector('.status');
+const winningCellDisplayList = document.querySelectorAll('.cell');
 
 let gameActive = true;
 let players = ["X", "O"];
@@ -34,8 +35,10 @@ function handlePlayerChange() {
 
 function handleResultValidation() {
     let roundWon = false;
+    let x = 0;
     for (let i = 0; i <= 7; i++) {
         const winCondition = winningConditions[i];
+        x = i;
         let a = gameState[winCondition[0]];
         let b = gameState[winCondition[1]];
         let c = gameState[winCondition[2]];
@@ -53,7 +56,7 @@ function handleResultValidation() {
         gameActive = false;
         statusDisplay.style.color = "rgb(251,100,204)";
         for(let j = 0; j <= 2; j++) {
-            gameState[winCondition[i][j]].style.color = "rgb(251,100,204)";
+            winningCellDisplayList[winningConditions[x][j]].style.color = "rgb(251,100,204)";
         }
         return;
     }
@@ -77,7 +80,14 @@ function handleCellClick(clickedCellEvent) {
         return;
     }
 
-    handleCellPlayed(clickedCell, clickedCellIndex);
+    if(currentPlayer == "O") {
+        let turnO = Math.round(Math.random() * 9)
+        gameState[turnO] = currentPlayer;
+        winningCellDisplayList[turnO].innerHTML = currentPlayer;
+    }
+    else {
+        handleCellPlayed(clickedCell, clickedCellIndex);
+    }
     handleResultValidation();
 }
 
@@ -87,6 +97,9 @@ function handleRestartGame() {
     gameState = ["", "", "", "", "", "", "", "", ""];
     statusDisplay.style.color = "rgb(65, 65, 65)";
     statusDisplay.innerHTML = currentPlayerTurn();
+    for(let i = 0; i < winningCellDisplayList.length; i++) {
+        winningCellDisplayList[i].style.color = "rgb(65, 65, 65)";
+    }
     document.querySelectorAll('.cell').forEach(cell => cell.innerHTML = "");
 }
 
