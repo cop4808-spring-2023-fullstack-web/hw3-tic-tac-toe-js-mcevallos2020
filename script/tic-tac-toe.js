@@ -1,7 +1,8 @@
 const statusDisplay = document.querySelector('.status');
 
 let gameActive = true;
-let currentPlayer = "X";
+let players = ["X", "O"];
+let currentPlayer = players[Math.round(Math.random())];
 let gameState = ["", "", "", "", "", "", "", "", ""];
 
 const winningMessage = () => `Player ${currentPlayer} has won!`;
@@ -51,6 +52,9 @@ function handleResultValidation() {
         statusDisplay.innerHTML = winningMessage();
         gameActive = false;
         statusDisplay.style.color = "rgb(251,100,204)";
+        for(let j = 0; j <= 2; j++) {
+            gameState[winCondition[i][j]].style.color = "rgb(251,100,204)";
+        }
         return;
     }
 
@@ -79,7 +83,7 @@ function handleCellClick(clickedCellEvent) {
 
 function handleRestartGame() {
     gameActive = true;
-    currentPlayer = "X";
+    currentPlayer = players[Math.round(Math.random())];
     gameState = ["", "", "", "", "", "", "", "", ""];
     statusDisplay.style.color = "rgb(65, 65, 65)";
     statusDisplay.innerHTML = currentPlayerTurn();
