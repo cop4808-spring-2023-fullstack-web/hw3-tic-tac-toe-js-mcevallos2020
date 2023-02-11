@@ -82,6 +82,9 @@ function handleCellClick(clickedCellEvent) {
 
     if(currentPlayer == "O") {
         let turnO = Math.round(Math.random() * 9)
+        while(gameState[turnO] != "") {
+            turnO = Math.round(Math.random() * 9)
+        }
         gameState[turnO] = currentPlayer;
         winningCellDisplayList[turnO].innerHTML = currentPlayer;
     }
