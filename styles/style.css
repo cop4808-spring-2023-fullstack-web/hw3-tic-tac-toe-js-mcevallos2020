@@ -52,13 +52,19 @@ a:visited {
 /*************************************/
 /******        Game Status       *****/
 /*************************************/
+.status-bar {
+    display: grid;
+    grid-template-rows: 1fr 1fr 1fr;
+    margin: 3rem 0 1rem 0;
+    border: 6px solid rgb(65, 65, 65);
+}
+
 .status {
     color: rgb(65, 65, 65);
     /* color: orangered; */
     font-size: 1.2rem;
     font-weight: 600;
 }
-
 /*************************************/
 /******       Reload Button      *****/
 /*************************************/
