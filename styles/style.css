@@ -21,7 +21,7 @@ body {
     margin-bottom: 0.6rem;
 }
 
-.container {
+.tic-tac-toe-box {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     margin: 3rem 0 1rem 0;
@@ -34,7 +34,7 @@ body {
     margin: -6px 0 0 -6px;
     text-align: center;
     vertical-align: middle;
-    line-height: 6rem;
+    line-height: 4.5rem;
     font-size: 6rem;
     cursor: pointer;
     

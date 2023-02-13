@@ -13,7 +13,7 @@ let playerWins = [0, 0];
 const winningMessage = () => `Player ${currentPlayer} has won!`;
 const drawMessage = () => `Game ended in a draw!`;
 const currentPlayerTurn = () => `It's ${currentPlayer}'s turn`;
-const scoreBoard = () => `Player X's Score: ${playerWins[0]} | Player O's Score: ${playerWins[1]}`;
+const scoreBoard = () => `Player X's Score: ${playerWins[0]} | Player O's Score: ${playerWins[1]}`; //keeps track of how many wins per player; pushed to status bar
 
 statusDisplay[0].innerHTML = currentPlayerTurn();
 
@@ -37,16 +37,16 @@ function handlePlayerChange() {
     currentPlayer = currentPlayer === "X" ? "O" : "X";
     statusDisplay[0].innerHTML = currentPlayerTurn();
     if(currentPlayer == "O") {
-        turnO();
+        turnO(); //if the current player is O (the computer) then the turn gets handled automatically with no click event needed
     }
 }
 
 function sleep(milliseconds) {
-    return new Promise(resolve => setTimeout(resolve, milliseconds));
+    return new Promise(resolve => setTimeout(resolve, milliseconds)); //delays function execution
  }
 
-async function turnO() {
-    await sleep(Math.floor(Math.random() * (1500 - 500) + 500))
+async function turnO() { //function handles computer turn using Math.random to assign the "chosen" cell
+    await sleep(Math.floor(Math.random() * (3000 - 1000) + 1000))
     let turnO = Math.round(Math.random() * 9)
     while(gameState[turnO] != "") {
         turnO = Math.round(Math.random() * 9)
@@ -79,9 +79,9 @@ function handleResultValidation() {
         gameActive = false;
         statusDisplay[0].style.color = "rgb(251,100,204)";
         for(let j = 0; j <= 2; j++) {
-            winningCellDisplayList[winningConditions[x][j]].style.color = "rgb(251,100,204)";
+            winningCellDisplayList[winningConditions[x][j]].style.color = "rgb(251,100,204)"; //if round is won, then the cells of the round's winning condition get highlighted
         }
-        if(currentPlayer == "X") {
+        if(currentPlayer == "X") { //if-else handles incrementing player wins per round
             playerWins[0]++;
         }
         else {
@@ -127,7 +127,7 @@ function handleRestartGame() {
     statusDisplay[1].style.color = "rgb(65, 65, 65)";    
     statusDisplay[0].innerHTML = currentPlayerTurn();
     for(let i = 0; i < winningCellDisplayList.length; i++) {
-        winningCellDisplayList[i].style.color = "rgb(65, 65, 65)";
+        winningCellDisplayList[i].style.color = "rgb(65, 65, 65)"; //unhighlights/erases each cell
     }
     document.querySelectorAll('.cell').forEach(cell => cell.innerHTML = "");
     if(currentPlayer == "O") {
